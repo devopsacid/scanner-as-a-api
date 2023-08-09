@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scanner-batch-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scanner-batch
+  template:
+    metadata:
+      labels:
+        app: scanner-batch
+    spec:
+      containers:
+        - name: scanner-batch-container
+          image: mmaxian/scanner-batch-image:latest
+          env:
+            - name: SCAN_ENDPOINT
+              value: "scanner-api-service"
+            # - name: SCAN_PORT
+            #   value: "8000"
+            - name: SCAN_IP
+              value: "192.168.1.1"    # replace with IP you want to scan
+            - name: SCAN_FUNCTION
+              value: "scan"           # replace with function you want to use
+            # - name: SCAN_INTERVAL
+            #   value: "300"            # give a value in seconds for the interval between scans

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scanner-api-deployment
+  labels:
+    app: scanner-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scanner-api
+  template:
+    metadata:
+      labels:
+        app: scanner-api
+    spec:
+      containers:
+      - name: scanner-api
+        image: mmaxian/scanner-api:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: REDIS_HOST
+          value: redis-service
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_DB
+          value: "0"

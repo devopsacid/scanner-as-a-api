@@ -1,0 +1,5 @@
+python-nmap==0.7.1
+flask==2.3.2
+jsondiff== 2.0.0
+redis==4.6.0
+
